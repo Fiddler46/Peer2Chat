@@ -1,0 +1,19 @@
+\begin{thebibliography}{1}
+
+\bibitem{rai2013socket}
+Rohit Rai.
+\newblock {\em Socket. IO Real-time Web Application Development}.
+\newblock Packt Publishing Ltd, 2013.
+
+\bibitem{spurlock2013bootstrap}
+Jake Spurlock.
+\newblock {\em Bootstrap: Responsive Web Development}.
+\newblock " O'Reilly Media, Inc.", 2013.
+
+\bibitem{tilkov2010node}
+Stefan Tilkov and Steve Vinoski.
+\newblock Node. js: Using javascript to build high-performance network
+  programs.
+\newblock {\em IEEE Internet Computing}, 14(6):80--83, 2010.
+
+\end{thebibliography}

@@ -1,0 +1,488 @@
+\documentclass{fisatproject}
+\title{Decentralised Chat App}
+\team{Dharwish Raj - FIT17CS046 \\ Adhyaksh Guhan - FIT17CS007 \\ Alen Raphaelnotrealnumber - FIT17CS042 \\ Ajay Dijinotrealnumber - FIT17CS045}
+\author{Dharwish Raj(FIT17CS046), Adhyaksh Guhan(FIT17CS007), Alen Raphaelnotrealnumber(FIT17CS042), Ajay Dijinotrealnumber(FIT17CS045)}
+\begin{document}
+\maketitle
+
+\makecert
+
+\newpage
+%\thispagestyle{plain}
+\pagenumbering{roman}
+\setcounter{page}{1}
+\newgeometry{top=4cm,bottom=0.1cm}
+\renewcommand\abstractname{ABSTRACT}
+\begin{abstract}
+\vspace{5cm}
+A decentralised application is one that does lies outside the purview and control of a single authority. This enables the app to allow for transfer of data with complete anonimity and interruptions from third-parties. This project uses a peer-to-peer (p2p) network to enable communication between multiple parties in a decentralised fashion.
+\end{abstract}
+
+
+\newpage
+%\thispagestyle{plain}
+\renewcommand\abstractname{ACKNOWLEDGMENT}
+\begin{abstract}
+\vspace{5cm}
+If words are considered as symbols of approval and tokens of acknowledgment , then let the words play the heralding role of expressing our gratitude. \\ \\
+ \textbf{Ms. Anitha P}, Chairman, Governing Body-FISAT, who provided us with vital facilities required by the project right from the inception to completion. \\ \\
+ We express our deepest appreciation towards \textbf{Dr. George Issac}, Principal ,FISAT, for providing amenities, which helped us in the fulfillment of our project. \\ \\
+ \textbf{Dr. Prasad J.C} , Head of Department of Computer Science and Engineering, FISAT, guided us  and rendered his help in all phases of our project. \\ \\
+ We would also like to express our gratitude to \textbf{Ms. Sruthy Suresh , Ms. Divya John}, had been a pillar of support for the successful completion of our project. \\ \\
+ Last but not the least, we express our sincere gratitude to all the staffs of the Department of Computer Science  and Engineering, who helped us in the course of work. \\ \\
+
+\vspace{1cm}
+\begin{flushright}
+Dharwish Raj(FIT17CS046)
+Adhyaksh Guhan(FIT17CS007)
+Alen Raphaelnotrealnumber(FIT17CS042)
+Ajay Dijinotrealnumber(FIT17CS045)
+\end{flushright}
+\end{abstract}
+\newpage
+
+\restoregeometry
+\tableofcontents
+
+\newpage
+\pagestyle{fancy}
+
+
+\chapter{INTRODUCTION}
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\renewcommand{\baselinestretch}{1.50}
+\section{Overview}
+Decentralised networks, as opposed to centralised networks, are organised in a much more distributed fashion. Each node within the network functions as a separate authority with independent decision-making power regarding how it interacts with other systems. These networks also distribute processing power and workload functions among connected servers. This creates a lack of any central power that can maintain control over the whole network and control how information flows within it. The P2P based chat app utlises this philosophy and can connect one peer to another to start a conversation in complete anonimity.
+
+
+\chapter{RELATED WORK}
+
+\begin{itemize}
+	\item Broadcasting can be very useful for making announcements in large organizations through an app which can either be connected to the LAN or to the internet. 
+
+	\item Broadcasting can be used for making public chat rooms that allow people to talk to large number of other people anonymously or by signing up to their sites
+
+	\item Broadcasting can be used for sending large files over a server to multiple people very fast and easily. This is really useful for large enterprises
+
+	\item Broadcasting is used by DTH providers and FM radios for connecting a large number of users with their programs.
+\end{itemize}
+
+
+\chapter{DESIGN and IMPLEMENTATION}
+
+\section{Design}
+
+The announcement broadcast system has been implemented using : 
+  \begin{itemize}
+ \item A socket.io server in the backend to handle incoming messages and broadcast them to all connected clients.
+ \item A JavaScript socket.io client to send messages from the user, and listen to and display messages from other users..
+ \item A web application server to serve the HTML page, the socket.io server and any static files we need.
+ \end{itemize}
+
+   \subsection{How this works}
+   
+   The data flows back and forth between the client and the server. When a client sends a message to a server the server receives the message and to broadcast this message to all the clients, we use the io.sockets.emit method.
+   
+   Basically Socket.IO is of two parts:
+\begin{itemize}
+    \item A server that integrates mounts on Node.JS HTTP Server socket.io
+    \item A client library that loads on the browser side socket.io-client
+\end{itemize}
+
+
+
+   \vspace{1cm}
+  
+ 
+    
+    \vspace{1cm}
+    \subsection{User Interface}
+    The front end bit is done using html for the basic layout and CSS to stylize the html page.    
+    \newpage
+
+\section{Implementation}
+    Socket.IO is a bidirectional communication javascript library, Usually the server needs to be refreshed for a message to be delivered to a client but when using socket.IO the communication becomes instantaneous.
+	After creating a basic layout using html and css we move on to the sending broadcasts part. In the file chat.js we query the DOM elements from the html file so that we can create references for them.
+	\begin{itemize}
+	    \item const message refers to the box area where we enter the message
+	    \item handle is where the username is entered
+	    \item Send sends the message when pressed.
+	    \item output is where the messages will be displayed
+	\end{itemize}
+\vspace{1cm}
+
+Now next what happens is when a message is send by a client with a handle name to the server the server accepts this message and emits the same message to all connected clients on the single press of the send button, thus basically broadcasting the message to all connected users.
+
+The emit method basically takes in two arguments.
+
+    \begin{itemize}
+	    \item The name of the message event
+	    \item And the text entered in the chat field.
+
+	\end{itemize}
+	
+	Next at index.js we receive this message that was emitted by the client.We have to recieve this chat and emt it to all other clients too. For that this small snippet of code is used
+	\begin{lstlisting}[language=c++]
+	socket.on('chat',function(data){
+           io.sockets.emit('chat',data);
+   });
+   \end{lstlisting}
+    \vspace{1cm}
+    Whats basically happening here is that when a socket connection is esteblished with a client we are using on method to listen to the callback function, this function takes data as a parameter and receives the data we sent and send out the recieved message to all connected sockets using io.sockets.emit.
+    
+    \vspace{1cm}
+    Next part is displaying the sent chat on all the html pages that have the client for that n innerhtml is used in chat.js 
+    \begin{lstlisting}[language=c++]
+	socket.on('chat',function(data){
+    feedback.innerHTML = '';
+    output.innerHTML +='<li>'+'<div class="chat-body clearfix">'+'<div class="header">'+'<small class=" text-muted">'+'<span class="glyphicon glyphicon-time">'+'</span>'+ date +'</small>'+' <strong class="pull-right primary-font">'+data.handle+'</strong>' +'</div>'+'<p>'+ data.message + '</p>'+'</div>'+'</li>';
+});
+
+   \end{lstlisting}
+
+
+\chapter{TESTING}
+The project was implemented by testing at multiple stages.
+First a testing was done as soon as a client could be connected to the server, which displayed the client was connected as soon as a server client connection was established.
+
+
+Then multiple clients were connected to the same server and tested
+
+
+
+After this an app with a similar UI to our familiar chat apps were made, with a handle so that the user can identify who is broadcasting the given message.
+\chapter{RESULTS}
+
+
+The final result of the project is a broadcasting app that basically comprises of a server and multiple clients. Multiple clients can connect to a single server, can give their own names and also send and receive messages.The broadcasting app uses Socket.io to connect the server to the clients.Such a system can be used in institutions for Broadcasting important information between the faculty and the students using a LOCAL AREA NETWORK.
+
+
+
+
+
+
+
+
+
+
+
+
+\chapter{CONTRIBUTIONS}
+
+Each member of team had contributed equally to the project. The files style.css and index.html was worked on by all four members of the group,each member made changes to html and css file as thought would improve the user experience of the app, The other two main files the index.js and chat.js each person tried a version for themselves and the one that best worked was chosen at the end.
+
+
+
+
+
+
+\chapter{CONCLUSION}
+
+Broadcasting can thus be considered as a relevant and important technology in day today life of small businesses, enterprises, institutions and media companies. The broadcasting app we implement here leverages the technology to make announcements within Organizations easier than what we are used to. This app can be further modified with a login system and with features to enable sending of large multimedia files in the future if necessary which would then enable for a really secure was of communication using the LAN for the respective firm.
+\newpage
+
+
+
+\bibliographystyle{plain}
+\bibliography{bib1.bib,bib2.bib,bib3.bib}
+\maketitle
+References -\cite{rai2013socket,spurlock2013bootstrap,tilkov2010node}
+
+
+\begin{appendices}
+\chapter{Sample Code}
+\section{index.js}
+\begin{lstlisting}[language=c++]
+
+const express = require('express');
+const socket = require('socket.io');
+let clients = 0;
+const app = express();
+const server = app.listen(4000,function(){
+   console.log("listening to the request on port 4000");
+});
+
+//static files
+
+app.use(express.static('public'));
+
+const io = socket(server);
+
+
+io.on('connection',function(socket){
+
+   socket.on('chat',function(data){
+           io.sockets.emit('chat',data);
+   });
+
+   socket.on('typing', function(data){
+      socket.broadcast.emit('typing', data);
+   });
+});
+
+\end{lstlisting}
+\newpage
+\section{chat.js}
+\begin{lstlisting}[language=c++]
+
+
+const socket = io.connect('http://localhost:4000');
+
+//Query DOM
+const message = document.getElementById('message');
+const handle = document.getElementById('handle');
+const sendButton = document.getElementById('send');
+const output = document.getElementById('output');
+const announcements = document.querySelectorAll('.announcements');
+const feedback = document.getElementById('feedback');
+const rightPanel = document.getElementById('right-panel');
+//create date object
+const date = new Date().toDateString();
+
+//emit events
+
+sendButton.addEventListener('click',function(){
+    if(message.value.length > 0 & handle.value.length > 0){
+        socket.emit('chat', {
+            message: message.value,
+            handle: handle.value
+        });
+      }
+      message.value = "";
+});
+
+message.addEventListener('keypress', function(){
+    if(handle.value.length > 0){
+      socket.emit('typing', handle.value);
+    }
+  });
+
+//listen for events
+
+socket.on('chat',function(data){
+    feedback.innerHTML = '';
+    output.innerHTML +='<li>'+'<div class="chat-body clearfix">'+'<div class="header">'+'<small class=" text-muted">'+'<span class="glyphicon glyphicon-time">'+'</span>'+ date +'</small>'+' <strong class="pull-right primary-font">'+data.handle+'</strong>' +'</div>'+'<p>'+ data.message + '</p>'+'</div>'+'</li>';
+});
+
+socket.on('typing', function(data){
+    feedback.innerHTML = '<p><em>' + data + ' is typing a message...</em></p>';
+});
+
+\end{lstlisting}
+\newpage
+
+
+\section{index.html}
+\begin{lstlisting}[language=c++]
+
+
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="description" content="Chat">
+      <meta name="keywords" content="HTML,CSS,JavaScript,SOCKET.IO">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Broadcast App</title>
+      <script src="/socket.io/socket.io.js"></script>
+      <!-- Latest compiled and minified CSS -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+      <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+      <link href="/styles.css" rel="stylesheet" >
+   </head>
+   <body>
+      <div class="container-fluid header-container px-0">
+         <div class="row mx-0">
+            <div class="col-sm-12 px-0">
+               <div class="row">
+                  <div class="col-sm-3">
+                  </div>
+                  <div class="col-sm-6">
+                     <br> <br>
+                     <h1 class="header-text">Broadcast app</h1>
+                  </div>
+               </div>
+            </div>
+            <!-- end of col-sm-12 -->
+         </div>
+         <!-- end of row -->
+      </div>
+      <!-- end of container> -->
+       <div>
+       <p id="feedback"></p>
+      </div>
+      <div class="container-fluid" id="output-container">
+         <div class="row no-gutters">
+            <div class="col-sm-3 side" id="left-panel"></div>
+            <div class="col-sm-6" id="main-output">
+               <div class="row output-row no-gutters">
+                  <div class="col-sm-12"id="output">
+                     <p class="announcements"></p>
+                  </div>
+               </div>
+               <!-- end of row -->
+               <div class="row no-gutters">
+                  <div class="col-sm-10" id="changecolour">
+                     <textarea id="message" type="text" placeholder="Message"></textarea>
+                  </div>
+                  <!-- end of col-sm-6-->
+                  <div class="col-sm-2 no-gutters" id="action-here">
+                     <input id="handle" type="text" placeholder="Handle" />
+                     <button class="btn-btn-success btn-block" id="send">Send</button>
+                  </div>
+                  <!--end of col-sm-12 -->
+               </div>
+               <!-- end of nested row -->
+            </div>
+            <!-- end of col-sm-8 -->
+            <div class="col-sm-3 side" id="right-panel"></div>
+         </div>
+         <!-- end of row -->
+      </div>
+      <!-- end of container -->
+      <script src="/chat.js"></script>
+      <!-- jQuery library -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <!-- Latest compiled JavaScript -->
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+   </body>
+</html>
+\end{lstlisting}
+\newpage
+
+\section{style.css}
+\begin{lstlisting}[language=c++]
+
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,400i,700");
+body{
+  font-family: Montserrat, sans-serif;
+  color: rgb(255, 255, 255);
+  background-color: rgb(253, 253, 253);
+  overflow-x: hidden;
+}
+
+.header-container{
+  background-image: url("images/kidda.png");
+  height:150px;
+  border-top: 3px solid rgb(255, 255, 255);
+
+}
+.header-text{
+  text-transform: uppercase;
+  font-weight: 900;
+  opacity: 0.7;
+  color: #000000;
+}
+
+#main-output{
+  background-color: rgb(0, 0, 0);
+  height: 100%;
+}
+#output{
+  height: 450px;
+  overflow-y: scroll;
+  width: 50%;
+  background-color:#bbbbbb;
+  border-bottom: 3px solid rgb(78, 78, 78);
+}
+
+.chat
+{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+
+.chat li .chat-body p
+{
+    margin: 0;
+    color: #777777;
+}
+
+.panel .slidedown .glyphicon, .chat .glyphicon
+{
+    margin-right: 5px;
+}
+.chat li
+{
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px dotted rgb(169, 178, 179);
+}
+
+#message {
+    width: 100%;
+    height: 100%;
+    background-color:#ffffff;
+    color: #000000;
+}
+
+#send{
+  background-color: #3b5998 ;
+  color: #FFFFFF;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  height: 70%;
+  margin-top: 0px;
+  border: none;
+  opacity: 0.7;
+}
+
+#changecolour
+{
+  background-color: #929292;
+  height: 75px;
+}
+
+#handle{
+  width: 100%;
+  background-color:rgb(255, 255, 255);
+  opacity: 0.9;
+  margin-top: 0px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 0px;
+  height: 30%;
+  color:#000000;
+}
+#date{
+font-style: oblique;
+color:rgb(0, 0, 0);
+font-size: 14px;
+}
+
+#style-handle{
+  color: rgb(0, 0, 0);
+}
+.announcements{
+    color: #000000;
+    text-transform: full-width;
+}
+#right-panel{
+  padding-top: 3px;
+  padding: 30px;
+  text-align:center;
+  color: #ffffff;
+  border-top: 2px solid #7289DA;
+}
+#left-panel{
+  padding-top: 3px;
+  text-align:center;
+  color: #7289DA;
+  border-top:2px solid #7289DA;
+}
+#action-here
+{
+  background-color: #929292;
+}
+
+\end{lstlisting}
+
+\end{appendices}
+
+
+\end{document}
