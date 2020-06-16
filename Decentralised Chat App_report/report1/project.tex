@@ -1,7 +1,8 @@
 \documentclass{fisatproject}
+\usepackage{graphicx}
 \title{Peer2Chat - Decentralized Chat App }
-\team{Dharwish Raj - FIT17CS046 \\ Adhyaksh Guhan - FIT17CS007 \\ Alen Raphaelnotrealnumber - FIT17CS042 \\ Ajay Dijinotrealnumber - FIT17CS045}
-\author{Dharwish Raj(FIT17CS046), Adhyaksh Guhan(FIT17CS007), Alen Raphaelnotrealnumber(FIT17CS042), Ajay Dijinotrealnumber(FIT17CS045)}
+\team{Dharwish Raj - FIT17CS046 \\ Adhyaksh Guhan - FIT17CS007 \\ Alan Raphael - FIT15CS015 \\ Ajay Diji - FIT17CS009}
+\author{Dharwish Raj(FIT17CS046), Adhyaksh Guhan(FIT17CS007), Alan Raphael(FIT15CS015), Ajay Diji(FIT17CS009)}
 \begin{document}
 \maketitle
 
@@ -34,9 +35,12 @@ If words are considered as symbols of approval and tokens of acknowledgment , th
 \vspace{1cm}
 \begin{flushright}
 Dharwish Raj(FIT17CS046)
+
 Adhyaksh Guhan(FIT17CS007)
-Alen Raphaelnotrealnumber(FIT17CS042)
-Ajay Dijinotrealnumber(FIT17CS045)
+
+Alan Raphael(FIT15CS015)
+
+Ajay Diji(FIT17CS009)
 \end{flushright}
 \end{abstract}
 \newpage
@@ -54,6 +58,42 @@ Ajay Dijinotrealnumber(FIT17CS045)
 \renewcommand{\baselinestretch}{1.50}
 \section{Overview}
 Decentralised networks, as opposed to centralised networks, are organised in a much more distributed fashion. Each node within the network functions as a separate authority with independent decision-making power regarding how it interacts with other systems. These networks also distribute processing power and workload functions among connected servers. This creates a lack of any central power that can maintain control over the whole network and control how information flows within it. The P2P based chat app utlises this philosophy and can connect one peer to another to start a conversation in complete anonimity.
+
+	\subsection{Peer-to-peer}
+	Peer-to-peer (P2P) computing or networking is a distributed application architecture that partitions tasks or workloads between peers. Files can be shared directly between systems on the network without the need of a central server. In other words, each computer on a P2P network becomes a file server as well as a client.
+	
+	\begin{center}
+		\begin{figure}[h]
+			
+			\includegraphics[width=8.2cm]{p2p.png}
+			\caption{A p2p network}
+			
+		\end{figure}
+	\end{center}
+	The only requirements for a computer to join a peer-to-peer network are an Internet connection and P2P software. Common P2P software programs include Kazaa, Limewire, BearShare, Morpheus, and Acquisition. Once connected to the network, P2P software allows a user to search for files on other people's computers. Meanwhile, other users on the network can search for files on the user's computer, but typically only within a single folder that is designated to share. 
+	
+	\subsection{Advantages}
+
+	\begin{itemize}
+		\item \textbf{Easy of setup and maintanence}
+		The network is fast and inexpensive to setup and maintain as it requires no dedicated servers since all users act as both client and server.
+		
+		\item \textbf{More reliable}
+		The failure of a single peer in the network does not affect all other peers in the rest of the network due its decentralised nature.
+		
+		\item \textbf{Access to shared resources}
+		The user can control their shared resources and can set any resource as accessible as long as it is in a shared folder. This negates the need of a System Administrator.
+		
+	\end{itemize}
+	
+	\begin{center}
+		\begin{figure}[h]
+			
+			\includegraphics[scale=.75]{svp.jpg}
+			\caption{Server based vs P2P}
+			
+		\end{figure}
+	\end{center}
 
 
 \chapter{RELATED WORK}
@@ -183,7 +223,7 @@ The final result of the project is a broadcasting app that basically comprises o
 
 \chapter{CONTRIBUTIONS}
 
-Each member of team had contributed equally to the project. The files style.css and index.html was worked on by all four members of the group,each member made changes to html and css file as thought would improve the user experience of the app, The other two main files the index.js and chat.js each person tried a version for themselves and the one that best worked was chosen at the end.
+Each member of team had contributed equally to the project. The files style.css and index.html was worked on by all four members of the group,each member made changes to html and css file as thought would improve the user experience of the app, The other two main files the index.js and chat.js each person tried a version for themselves and the one that best worked was chosen at the end. (not realy Contribution-needs changes)
 
 
 
@@ -192,15 +232,16 @@ Each member of team had contributed equally to the project. The files style.css 
 
 \chapter{CONCLUSION}
 
-Broadcasting can thus be considered as a relevant and important technology in day today life of small businesses, enterprises, institutions and media companies. The broadcasting app we implement here leverages the technology to make announcements within Organizations easier than what we are used to. This app can be further modified with a login system and with features to enable sending of large multimedia files in the future if necessary which would then enable for a really secure was of communication using the LAN for the respective firm.
+Decentralised networks can be an effective method of communication and sharing that prioritises encryption and privacy for all users. The growing number of privacy concerns due to the actions of various central powers can negated through the use of these networks, especially since they are fast and inexpensive to setup and maintain. This chatting app can enable easy communication and data sharing while also being inexpensive and safe to use for all involved users.
 \newpage
 
 
 
-\bibliographystyle{plain}
-\bibliography{bib1.bib,bib2.bib,bib3.bib}
-\maketitle
-References -\cite{rai2013socket,spurlock2013bootstrap,tilkov2010node}
+\begin{thebibliography}{1}
+	\bibitem{nist} Christensson, Per. "P2P Definition." TechTerms. Sharpened Productions, 2006. Web. 16 June 2020. 
+	\url{https://techterms.com/definition/p2p}
+	
+\end{thebibliography}
 
 
 \begin{appendices}
