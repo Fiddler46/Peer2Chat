@@ -136,11 +136,11 @@ Peer2Chat is implemented using following technologies :
    \subsection{How this works}
    
     	\subsubsection{Peer-to-Peer Communication}
-   WebTorrent is a library which created a new kind of Torrent Trackers called \textbf{"WebSocket Trackers"}  also known as "WebTorrent Trackers". Most of the torrent clients are using this technology to share files. But web-based  clients have a limitation that it  JavaScript in browser can't directly make TCP/IP connections and communicate. to overcome this problem, we use WebRTC. WebRTC is the method by which browsers can communicate to other browsers peer to peer (P2P). WebTorrent makes use of WebRTC for sharing Torrents on web. But to establish peer2peer connection between WebRTC a signalling server is needed. To avoid that we use WebSocket trackers as the singling servers to establish communication between clients.  
+   WebTorrent is a library which created a new kind of Torrent Trackers called \textbf{"WebSocket Trackers"}  also known as "WebTorrent Trackers". Most of the torrent clients are using this technology to share files. But web-based  clients have a limitation that it  JavaScript in browser can't directly make TCP/IP connections and communicate. To overcome this problem, we use WebRTC. WebRTC is the method by which browsers can communicate to other browsers peer to peer (P2P). WebTorrent makes use of WebRTC for sharing Torrents on web. But to establish peer2peer connection between WebRTC a signalling server is needed. To avoid that we use WebSocket trackers as the singling servers to establish communication between clients.  
    		\subsubsection{Finding Clients (Peers)}
-   		We use a magnet link. That magnet link has a unique identifier for our torrent called the \textbf{Info Hash}. This ID will be unique for all torrents.
+   		We use a magnet link. The magnet link has a unique identifier for our torrent called the \textbf{Info Hash}. This ID will be unique for all torrents.
    		
-   		Similarly, to implemented chat app, we use a identifier. This identifier is converted to a valid Info Hash and sent to our WebTorrent trackers who will give us a list of web peers. These web peers would be the other users also using our app
+   		Similarly, to implemented chat app, we use an identifier. This identifier is converted to a valid Info Hash and sent to our WebTorrent trackers who will give us a list of web peers. These web peers would be the other users also using our app.
 
 
 
@@ -150,11 +150,11 @@ Peer2Chat is implemented using following technologies :
     
     \vspace{1cm}
     \subsection{User Interface}
-    The front-end interface of our chat application is build using Vue.js, which will help single page navigation compared to regular HTML/CSS
+    The front-end interface of our chat application is build using Vue.js, which will help single page navigation compared to regular HTML/CSS.
     \newpage
 
 \section{Implementation}
-    Whats basically happening here is that when client load this app, Trackers will pass InfoHash to the new client which contains manget link.
+    What is basically happening here is that when client load this app, Trackers will pass InfoHash to the new client which contains manget link.
     
         \vspace{0.6cm}
 Announcing Trackers URL in app.js  
@@ -234,7 +234,7 @@ The final result of the project is a broadcasting app that basically comprises o
 
 \chapter{CONTRIBUTIONS}
 
-Each member of team had contributed equally to the project. The files style.css and index.html was worked on by all four members of the group,each member made changes to html and css file as thought would improve the user experience of the app, The other two main files the index.js and chat.js each person tried a version for themselves and the one that best worked was chosen at the end. (not realy Contribution-needs changes)
+Each member of team had contributed equally to the project. The parts that were worked on were the vue.js code, HTML and the p2p script to call the webtrackers for the webRTC. 
 
 
 
