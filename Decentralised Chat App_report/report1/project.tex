@@ -103,20 +103,20 @@ Decentralised networks, as opposed to centralised networks, are organised in a m
 	Augur combines decentralized networking and financial prediction markets to create powerful forecasting. It’s built upon the Ethereum blockchain. In its current guise, Augur allows you to make predictions about real-world events not limited to financial markets. The platform turns your prediction into “shares” that other users can buy or sell.
 	
 
-	\item 2. Vett.space
+	\item \textbf{2. Vett.space}
 	This is that game made online. It's an online multiplayer implementation of Dots-and-Boxes !
 	Built with VueJS, d3.js, P2PT. Uses WebTorrent trackers for making Peer-to-Peer connections for multiplayer.
 	
 
-	\item 3. Aragon
+	\item \textbf{3. Aragon}
 	
 	Aragon is an ambitious decentralized management platform, also built on the Ethereum blockchain. It wants to break down the traditional barriers that restrict the creation and maintenance of organizational structures. In other words, Aragon wants to make it easier to create private Decentralized Autonomous Organizations (DAOs), along with everything you need to succeed. This means arbitration, token management and transfers, role assignments, fundraising, and much more.
 
-	\item 4. Sia
+	\item \textbf{4. Sia}
 	
 	Sia is a promising decentralized storage platform that leverages “underutilized hard drive capacity around the world,” creating a first-of-its-kind blockchain-based data storage marketplace. The platform turns those empty hard drives into cheap cloud storage that almost anyone can use. Prices are cheap, especially when compared to other major cloud storage providers.
 	
-	\item 5. SAFE Network
+	\item \textbf{5. SAFE Network}
 	
 	The SAFE Network uses a decentralized approach to protecting consumer data and private communication. SAFE, which stands for Secure Access For Everyone, uses peer-to-peer technology to share that computing power between connected users. This creates a secure private network, rather than relying on centralized servers.
 \end{itemize}
@@ -126,22 +126,21 @@ Decentralised networks, as opposed to centralised networks, are organised in a m
 
 \section{Design}
 
-The announcement broadcast system has been implemented using : 
+Peer2Chat is implemented using following technologies : 
   \begin{itemize}
- \item A socket.io server in the backend to handle incoming messages and broadcast them to all connected clients.
- \item A JavaScript socket.io client to send messages from the user, and listen to and display messages from other users..
- \item A web application server to serve the HTML page, the socket.io server and any static files we need.
+ \item A web peer2peer communicating library called p2pt which developed using WebTorrent modules 
+ \item A JavaScript program that initiate Torrent trackers and accept peer list and packets passed
+ \item A web application interface for above programe runs on Vue.js 
  \end{itemize}
 
    \subsection{How this works}
    
-   The data flows back and forth between the client and the server. When a client sends a message to a server the server receives the message and to broadcast this message to all the clients, we use the io.sockets.emit method.
-   
-   Basically Socket.IO is of two parts:
-\begin{itemize}
-    \item A server that integrates mounts on Node.JS HTTP Server socket.io
-    \item A client library that loads on the browser side socket.io-client
-\end{itemize}
+    	\subsubsection{Peer-to-Peer Communication}
+   WebTorrent is a library which created a new kind of Torrent Trackers called \textbf{"WebSocket Trackers"}  also known as "WebTorrent Trackers". Most of the torrent clients are using this technology to share files. But web-based  clients have a limitation that it  JavaScript in browser can't directly make TCP/IP connections and communicate. to overcome this problem, we use WebRTC. WebRTC is the method by which browsers can communicate to other browsers peer to peer (P2P). WebTorrent makes use of WebRTC for sharing Torrents on web. But to establish peer2peer connection between WebRTC a signalling server is needed. To avoid that we use WebSocket trackers as the singling servers to establish communication between clients.  
+   		\subsubsection{Finding Clients (Peers)}
+   		We use a magnet link. That magnet link has a unique identifier for our torrent called the \textbf{Info Hash}. This ID will be unique for all torrents.
+   		
+   		Similarly, to implemented chat app, we use a identifier. This identifier is converted to a valid Info Hash and sent to our WebTorrent trackers who will give us a list of web peers. These web peers would be the other users also using our app
 
 
 
@@ -151,48 +150,60 @@ The announcement broadcast system has been implemented using :
     
     \vspace{1cm}
     \subsection{User Interface}
-    The front end bit is done using html for the basic layout and CSS to stylize the html page.    
+    The front-end interface of our chat application is build using Vue.js, which will help single page navigation compared to regular HTML/CSS
     \newpage
 
 \section{Implementation}
-    Socket.IO is a bidirectional communication javascript library, Usually the server needs to be refreshed for a message to be delivered to a client but when using socket.IO the communication becomes instantaneous.
-	After creating a basic layout using html and css we move on to the sending broadcasts part. In the file chat.js we query the DOM elements from the html file so that we can create references for them.
-	\begin{itemize}
-	    \item const message refers to the box area where we enter the message
-	    \item handle is where the username is entered
-	    \item Send sends the message when pressed.
-	    \item output is where the messages will be displayed
-	\end{itemize}
-\vspace{1cm}
-
-Now next what happens is when a message is send by a client with a handle name to the server the server accepts this message and emits the same message to all connected clients on the single press of the send button, thus basically broadcasting the message to all connected users.
-
-The emit method basically takes in two arguments.
-
-    \begin{itemize}
-	    \item The name of the message event
-	    \item And the text entered in the chat field.
-
-	\end{itemize}
-	
-	Next at index.js we receive this message that was emitted by the client.We have to recieve this chat and emt it to all other clients too. For that this small snippet of code is used
-	\begin{lstlisting}[language=c++]
-	socket.on('chat',function(data){
-           io.sockets.emit('chat',data);
+    Whats basically happening here is that when client load this app, Trackers will pass InfoHash to the new client which contains manget link.
+    
+        \vspace{0.6cm}
+Announcing Trackers URL in app.js  
+	\begin{lstlisting}[language=java]
+	let announceURLs = [
+	"wss://tracker.openwebtorrent.com",
+	"wss://tracker.sloppyta.co:443/announce",
+	"wss://tracker.novage.com.ua:443/announce",
+	"wss://tracker.btorrent.xyz:443/announce",
+	]
+	if (window.location.hostname === "localhost") {
+	announceURLs = ["ws://localhost:5000"]
    });
    \end{lstlisting}
-    \vspace{1cm}
-    Whats basically happening here is that when a socket connection is esteblished with a client we are using on method to listen to the callback function, this function takes data as a parameter and receives the data we sent and send out the recieved message to all connected sockets using io.sockets.emit.
-    
-    \vspace{1cm}
-    Next part is displaying the sent chat on all the html pages that have the client for that n innerhtml is used in chat.js 
-    \begin{lstlisting}[language=c++]
-	socket.on('chat',function(data){
-    feedback.innerHTML = '';
-    output.innerHTML +='<li>'+'<div class="chat-body clearfix">'+'<div class="header">'+'<small class=" text-muted">'+'<span class="glyphicon glyphicon-time">'+'</span>'+ date +'</small>'+' <strong class="pull-right primary-font">'+data.handle+'</strong>' +'</div>'+'<p>'+ data.message + '</p>'+'</div>'+'</li>';
-});
+           \vspace{0.6cm}
+   Magnet link will help to generate peer list (connected clients) on every client, so that it will establish communication with peers (clients using WebRTC)
+   
+   
+              \vspace{0.6cm}
+              Connect to network and start discovering peers in p2pt
+	 \begin{lstlisting}[language=java]
+	 start () {
+	 const $this = this
+	 
+	 this.on('peer', (peer) => {
+	 var newpeer = false
+	 if (!$this.peers[peer.id]) {
+	 newpeer = true
+	 $this.peers[peer.id] = {}
+	 $this.responseWaiting[peer.id] = {}
+	 }
+	 
+	 peer.on('connect', () => {
+	 $this.peers[peer.id][peer.channelName] = peer
+	 
+	 if (newpeer) {
+	 $this.emit('peerconnect', peer)
+	 }
+	 })
+	    \end{lstlisting}
+        \vspace{0.6cm}
 
-   \end{lstlisting}
+    
+
+Next we implementing function to join, send and revive data between client in App.js
+         \vspace{0.6cm}
+ 	 \begin{lstlisting}[language=java]
+ 	 
+ 	 \end{lstlisting}
 
 
 \chapter{TESTING}
