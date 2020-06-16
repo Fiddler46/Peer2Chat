@@ -87,7 +87,7 @@ module.exports = {
         announceURLs = ["ws://localhost:5000"]
       }
 
-      this.p2pt = new P2PT(announceURLs, 'p2chat' + this.room)
+      this.p2pt = new P2PT(announceURLs, 'peer2chat' + this.room)
     },
 
     joinChat () {
