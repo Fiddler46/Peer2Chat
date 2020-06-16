@@ -1,21 +1,21 @@
-\contentsline {chapter}{\numberline {1}INTRODUCTION}{1}% 
-\contentsline {section}{\numberline {1.1}Overview}{1}% 
-\contentsline {subsection}{\numberline {1.1.1}Peer-to-peer}{1}% 
-\contentsline {subsection}{\numberline {1.1.2}Advantages}{2}% 
-\contentsline {subsection}{\numberline {1.1.3}WebRTC}{3}% 
-\contentsline {chapter}{\numberline {2}RELATED WORK}{4}% 
-\contentsline {chapter}{\numberline {3}DESIGN and IMPLEMENTATION}{5}% 
-\contentsline {section}{\numberline {3.1}Design}{5}% 
-\contentsline {subsection}{\numberline {3.1.1}How this works}{5}% 
-\contentsline {subsubsection}{Peer-to-Peer Communication}{5}% 
-\contentsline {subsubsection}{Finding Clients (Peers)}{5}% 
-\contentsline {subsection}{\numberline {3.1.2}User Interface}{6}% 
-\contentsline {section}{\numberline {3.2}Implementation}{7}% 
-\contentsline {chapter}{\numberline {4}TESTING}{8}% 
-\contentsline {chapter}{\numberline {5}RESULTS}{9}% 
-\contentsline {chapter}{\numberline {6}CONTRIBUTIONS}{12}% 
-\contentsline {chapter}{\numberline {7}CONCLUSION}{13}% 
-\contentsline {chapter}{Appendices}{15}% 
-\contentsline {chapter}{\numberline {A}Sample Code}{16}% 
-\contentsline {section}{\numberline {A.1}App.vue}{16}% 
-\contentsline {section}{\numberline {A.2}index.html}{20}% 
+\contentsline {chapter}{\numberline {1}INTRODUCTION}{1}%
+\contentsline {section}{\numberline {1.1}Overview}{1}%
+\contentsline {subsection}{\numberline {1.1.1}Peer-to-peer}{1}%
+\contentsline {subsection}{\numberline {1.1.2}Advantages}{2}%
+\contentsline {subsection}{\numberline {1.1.3}WebRTC}{3}%
+\contentsline {chapter}{\numberline {2}RELATED WORK}{4}%
+\contentsline {chapter}{\numberline {3}DESIGN and IMPLEMENTATION}{5}%
+\contentsline {section}{\numberline {3.1}Design}{5}%
+\contentsline {subsection}{\numberline {3.1.1}How this works}{5}%
+\contentsline {subsubsection}{Peer-to-Peer Communication}{5}%
+\contentsline {subsubsection}{Finding Clients (Peers)}{5}%
+\contentsline {subsection}{\numberline {3.1.2}User Interface}{6}%
+\contentsline {section}{\numberline {3.2}Implementation}{7}%
+\contentsline {chapter}{\numberline {4}TESTING}{8}%
+\contentsline {chapter}{\numberline {5}RESULTS}{9}%
+\contentsline {chapter}{\numberline {6}CONTRIBUTIONS}{11}%
+\contentsline {chapter}{\numberline {7}CONCLUSION}{12}%
+\contentsline {chapter}{Appendices}{14}%
+\contentsline {chapter}{\numberline {A}Sample Code}{15}%
+\contentsline {section}{\numberline {A.1}App.vue}{15}%
+\contentsline {section}{\numberline {A.2}index.html}{19}%
